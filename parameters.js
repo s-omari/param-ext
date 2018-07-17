@@ -2,6 +2,7 @@
 
 (function () {
   $(document).ready(function () {
+    console.log('hello test from extension');
     const table = $('#parameterTable');
     const tableBody = table.children('tbody');
 
@@ -33,7 +34,7 @@
   //
   // To avoid multiple layout processing in the browser, we build the new row unattached to the DOM,
   // and then attach it at the very end.  This helps avoid jank.
-  function onParameterChange (parameterChangeEvent) {
+  function onParameterChange(parameterChangeEvent) {
     parameterChangeEvent.getParameterAsync().then(function (param) {
       const newRow = parameterRow(param);
       const oldRow = $("tr[data-fieldname='" + param.id + "'");
@@ -46,14 +47,14 @@
   //
 
   // A cell in the table
-  function cell (value) {
+  function cell(value) {
     const row = $('<td>');
     row.append(value);
     return row;
   }
 
   // A simple cell that contains a text value
-  function textCell (value) {
+  function textCell(value) {
     const cellElement = $('<td>');
     cellElement.text(value);
     return cellElement;
@@ -61,12 +62,12 @@
 
   // The allowable values column has a complex structure, so to make things easier/cleaner,
   // this function creates the subtree for the value of the allowable values column.
-  function allowableValues (value) {
-    function termKey (key) {
+  function allowableValues(value) {
+    function termKey(key) {
       return $('<dt>').attr('id', key).text(key);
     }
 
-    function termValue (value, default_) {
+    function termValue(value, default_) {
       return $('<dd>').text(value || default_);
     }
 
@@ -99,7 +100,7 @@
   }
 
   // This function creates a subtree of a row for a specific parameter.
-  function parameterRow (p) {
+  function parameterRow(p) {
     let row = $('<tr>').attr('data-fieldname', p.id);
     row.append(textCell(p.name));
     row.append(textCell(p.dataType));
